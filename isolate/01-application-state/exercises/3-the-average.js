@@ -20,11 +20,9 @@
 
 const state = {
   numbers: [],
-  average: 0
+  average: 0,
 };
-const stateLog = [
-  { state: deepClone(state) }
-];
+const stateLog = [{ state: deepClone(state) }];
 
 // --- logic function (this works) ---
 
@@ -53,13 +51,13 @@ while (true) {
   // create new log entry
   const inputLog = {
     action: 'input number',
-    input: nextInput
+    input: nextInput,
   };
   // push entry into stateLog
   //  it will be updated by reference!
   stateLog.push(inputLog);
 
-  if (_ || _) {
+  if (nextInput === null || nextInput === '') {
     // nothing more to log
     // exit the for loop, no more user input to collect
     break;
@@ -69,7 +67,7 @@ while (true) {
   // log the number
   inputLog.number = nextNumber;
 
-  if (_) {
+  if (Number.isNaN(nextNumber)) {
     // the user input an invalid number
     const message = `"${nextInput}" is not valid number`;
     alert(message);
@@ -82,23 +80,21 @@ while (true) {
 
   // the user input a valid number
   //  add the number to state
-  state._.push(nextNumber);
+  state.numbers.push(nextNumber);
   //  update the average in state
-  state._ = average(state.numbers);
+  state.average = average(state.numbers);
 
   // log the new state
   inputLog.state = deepClone(state);
-
-};
-
+}
 
 // render the final state for the user
 
 // read from state to find the average
-const firstLine = `the average is: ${state._}`;
+const firstLine = `the average is: ${state.average}`;
 
 // read from state to render the list of numbers
-const renderedNumbers = state._.reduce((list, nextNum) => {
+const renderedNumbers = state.numbers.reduce((list, nextNum) => {
   return `${list}\n: ${nextNum}`;
 }, '');
 const fullMessage = firstLine + renderedNumbers;

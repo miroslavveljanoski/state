@@ -24,9 +24,7 @@ const state = {
   guesses: [],
 };
 
-const gameLog = [
-  { state: deepClone(state) }
-];
+const gameLog = [{ state: deepClone(state) }];
 
 // --- declare view function ---
 
@@ -38,7 +36,8 @@ const gameLog = [
  * @returns {string} the solution with _s for letters that have not been guessed
  */
 const renderGuesses = (solution, guessed) => {
-  const guess = solution.split('')
+  const guess = solution
+    .split('')
     .map((character) => {
       return guessed.includes(character) ? character : '_ ';
     })
@@ -49,9 +48,10 @@ const renderGuesses = (solution, guessed) => {
 // --- begin main program ---
 
 // initial instructions
-const initialMessage = 'This is a two player game.  \n'
-  + 'One person enters a word, the other needs to guess it. \n\n'
-  + 'you may enter "exit" at any point to exit the game';
+const initialMessage =
+  'This is a two player game.  \n' +
+  'One person enters a word, the other needs to guess it. \n\n' +
+  'you may enter "exit" at any point to exit the game';
 alert(initialMessage);
 
 // one-way flag: once set the false the game ends
@@ -59,8 +59,7 @@ let stillPlaying = true;
 
 // first player enters the word to guess
 while (stillPlaying) {
-
-  const setWordMessage = 'player 1: \nenter a word for the other player to guess:'
+  const setWordMessage = 'player 1: \nenter a word for the other player to guess:';
   const userInput = prompt(setWordMessage);
 
   if (userInput === 'exit') {
@@ -72,17 +71,17 @@ while (stillPlaying) {
 
   const setWordLog = {
     action: 'set word',
-    userInput
+    userInput,
   };
   gameLog.push(setWordLog);
 
-  if (_) {
+  if (userInput === null) {
     const invalidMessage = 'there is not escape!';
     alert(invalidMessage);
     setWordLog.invalid = invalidMessage;
     continue;
   }
-  if (_) {
+  if (userInput.length === 0 || userInput === '') {
     const invalidMessage = 'a word has at least one letter';
     alert(invalidMessage);
     setWordLog.invalid = invalidMessage;
@@ -103,15 +102,13 @@ while (stillPlaying) {
     setWordLog.state = deepClone(state);
     break;
   }
-
 }
-
 
 // first player enters a hint
 while (stillPlaying) {
   const userInput = prompt('player 1: \nenter a hint to help the other player guess your word:');
 
-  if (_) {
+  if (userInput === 'exit') {
     alert('thank you for playing. \nhave a nice day');
     stillPlaying = false;
     gameLog.push({ action: 'exit' });
@@ -120,17 +117,17 @@ while (stillPlaying) {
 
   const setHintLog = {
     action: 'set hint',
-    userInput
+    userInput,
   };
   gameLog.push(setHintLog);
 
-  if (_) {
+  if (userInput === null) {
     const invalidMessage = 'there is not escape!';
     alert(invalidMessage);
     setHintLog.invalid = invalidMessage;
     continue;
   }
-  if (_) {
+  if (userInput.length === 0 || userInput === '') {
     const invalidMessage = 'a hint has at least one letter';
     alert(invalidMessage);
     setHintLog.invalid = invalidMessage;
@@ -140,43 +137,43 @@ while (stillPlaying) {
   const confirmed = confirm(`are you sure you this is your hint?\n"${userInput}"`);
   setHintLog.confirmed = confirmed;
 
-  if (_) {
+  if (confirmed) {
     state.hint = userInput;
     setHintLog.state = deepClone(state);
     break;
   }
 }
 
-
 // second player tries to guess the word
 while (stillPlaying) {
   // read from state to determine important information for the game:
   const guess = renderGuesses(state.word, state.guesses);
-  const remainingGuesses = (state.word.length * 2) - state.guesses.length;
+  const remainingGuesses = state.word.length * 2 - state.guesses.length;
   // https://stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string
   const remainingBlanks = (guess.match(/_/g) || []).length;
 
   // render this information for the user
-  const message = `player 2: \n${remainingBlanks} characters left to guess: \n\n  ${guess}\n`
-    + '\n'
-    + `you have ${remainingGuesses} guesses left: \n\n  ${state.guesses.join(', ')}\n`
-    + '\n'
-    + `hint: "${state.hint}"\n`
-    + '\n'
-    + 'click "cancel" to give up\n'
-    + 'enter "exit" to leave the game (without ever knowing the word!)\n';
+  const message =
+    `player 2: \n${remainingBlanks} characters left to guess: \n\n  ${guess}\n` +
+    '\n' +
+    `you have ${remainingGuesses} guesses left: \n\n  ${state.guesses.join(', ')}\n` +
+    '\n' +
+    `hint: "${state.hint}"\n` +
+    '\n' +
+    'click "cancel" to give up\n' +
+    'enter "exit" to leave the game (without ever knowing the word!)\n';
   const userInput = prompt(message);
 
   // check for early-exit conditions
-  if (_) {
+  if (userInput === 'exit') {
     alert('thank you for playing. \nhave a nice day');
     stillPlaying = false;
     gameLog.push({ action: 'exit' });
     break;
   }
-  if (_) {
+  if (userInput === null) {
     const giveUpLog = {
-      action: 'give up'
+      action: 'give up',
     };
     gameLog.push(giveUpLog);
 
@@ -184,7 +181,7 @@ while (stillPlaying) {
     const confirmed = confirm(confirmGiveUpMessage);
     giveUpLog.confirmed = confirmed;
 
-    if (_) {
+    if (confirmed) {
       alert(`you give up!!\n\nthe word was: \n\n  "${state.word}" \n\nyou'd guessed: \n\n  ${guess}`);
       stillPlaying = false;
       break;
@@ -196,24 +193,24 @@ while (stillPlaying) {
   // evaluate and log the user's guess
   const guessLog = {
     action: 'guess',
-    userInput
+    userInput,
   };
   gameLog.push(guessLog);
 
   // exit this input cycle if the user input is invalid
-  if (userInput._ !== _) {
+  if (userInput.length !== 1) {
     const invalidMessage = `"${userInput}" is not 1 character`;
     alert(invalidMessage);
     guessLog.invalid = invalidMessage;
     continue;
   }
-  if (state.guesses.includes(_)) {
+  if (state.guesses.includes(userInput)) {
     const invalidMessage = `"${userInput}" has already been guessed`;
     alert(invalidMessage);
     guessLog.invalid = invalidMessage;
     continue;
   }
-  if (!/^[a-zA-Z]+$/._(userInput)) {
+  if (!/^[a-zA-Z]+$/.test(userInput)) {
     const invalidMessage = `"${userInput}" is not a letter`;
     alert(invalidMessage);
     guessLog.invalid = invalidMessage;
@@ -232,33 +229,35 @@ while (stillPlaying) {
 
   // does the generated guess match the target word?
   //  win!
-  if (_.toLowerCase() === _._.toLowerCase()) {
-    const winMessage = `WIN! \n\n`
-      + `You guessed the word "${state.word}" in ${state._.length} guesses.\n\n`
-      + `  ${state.guesses.join(', ')}`
+  if (newGuess.toLowerCase() === state.word.toLowerCase()) {
+    const winMessage =
+      `WIN! \n\n` +
+      `You guessed the word "${state.word}" in ${state.guesses.length} guesses.\n\n` +
+      `  ${state.guesses.join(', ')}`;
     alert(winMessage);
 
     // log the final state and if the game was won or lost
     gameLog.push({
       win: true,
-      state: deepClone(state)
+      state: deepClone(state),
     });
     break;
   }
   // did the player use up all of their guesses?
   //  no win :(
-  if (state.guesses.length === (state.word.length * 2)) {
-    const loseMessage = `lose :( \n\nthe word was: \n\n  "${state._}" \n\nyou'd guessed: \n\n  ${newGuess}\n\n`
-      + `  ${state._.join(', ')}`;
+  if (state.guesses.length === state.word.length * 2) {
+    const loseMessage =
+      `lose :( \n\nthe word was: \n\n  "${state.word}" \n\nyou'd guessed: \n\n  ${newGuess}\n\n` +
+      `  ${state.guesses.join(', ')}`;
     alert(loseMessage);
 
     // log the final state and if the game was won or lost
     gameLog.push({
       win: false,
-      state: deepClone(state)
+      state: deepClone(state),
     });
     break;
   }
-};
+}
 
 console.log(gameLog);

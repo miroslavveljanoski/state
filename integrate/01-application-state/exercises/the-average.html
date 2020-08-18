@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>the average</title>
 
+<<<<<<< HEAD
 <head>
   <meta charset='utf-8'>
   <title>the average</title>
@@ -47,92 +51,129 @@
     const renderNumberLis = (arrOfNumbers) => {
       const addListEntry = (list, next) => {
         return `${list}\n<li>${next}</li>`;
+=======
+    <script src="../../../lib/deep-clone.js"></script>
+
+    <script id="data">
+      'use strict';
+
+      const state = {
+        numbers: [],
+        average: 0,
       };
-      return arrOfNumbers.reduce(addListEntry, '');
-    };
+      const appLog = [{ state: deepClone(state) }];
+    </script>
 
-    const renderAverage = (avg) => {
-      return `<p>average:</p> <code>${avg}</code>`;
-    };
-  </script>
-
-  <script id='handlers'>
-    'use strict';
-
-    const addNumberHandler = () => {
-      const logEntry = {
-        action: 'add number'
+    <script id="logic">
+      // this functions works
+      /**
+       * computes the average of all numbers in an array
+       * if the array has no entries, it returns 0
+       * @param {number[]} arrOfNumbers - an array of numbers to average
+       * @returns {number} the average of all numbers in the array
+       */
+      const average = (arrOfNumbers) => {
+        if (arrOfNumbers.length === 0) {
+          return 0;
+        }
+        const numberOfNumbers = arrOfNumbers.length;
+        const sum = arrOfNumbers.reduce((sum, next) => sum + next);
+        const average = sum / numberOfNumbers;
+        return average;
+>>>>>>> 790a44e... Finish isolete and integrate week-1
       };
-      appLog.push(logEntry);
+    </script>
 
-      const inputEl = document.getElementById('number-input');
-      const userInput = Number(inputEl.value);
-      // log user input
-      logEntry.input = userInput;
+    <script id="views">
+      // the views all work
+      'use strict';
 
-      // update state
-      state._.push(_);
-      state._ = average(_._);
-      // log new state
-      logEntry.state = deepClone(_);
-
-      // render and append new list
-      const listView = renderNumberLis(_._);
-      document.getElementById('numbers-list').innerHTML = _;
-      // log new list view
-      logEntry.listView = _;
-
-      // render and append new average
-      const averageView = _(_.average);
-      document.getElementById('average').innerHTML = _;
-      // log new average view
-      logEntry.averageView = _;
-    };
-
-    const resetHandler = () => {
-      const logEntry = {
-        action: 'reset'
+      const renderNumberLis = (arrOfNumbers) => {
+        const addListEntry = (list, next) => {
+          return `${list}\n<li>${next}</li>`;
+        };
+        return arrOfNumbers.reduce(addListEntry, '');
       };
-      appLog.push(logEntry);
 
-      // reset state to it's initial values
-      state.numbers = _;
-      state.average = _;
-      // log new state
-      logEntry.state = deepClone(state);
+      const renderAverage = (avg) => {
+        return `<p>average:</p> <code>${avg}</code>`;
+      };
+    </script>
 
-      // reset Ui
-      document.getElementById('numbers-list').innerHTML = '';
-      document.getElementById('average').innerHTML = '';
-    };
-  </script>
-</head>
+    <script id="handlers">
+      'use strict';
 
-<body>
+      const addNumberHandler = () => {
+        debugger;
+        const logEntry = {
+          action: 'add number',
+        };
+        appLog.push(logEntry);
 
-  <main id='user interface'>
-    <button onclick='console.log(appLog)'>appLog</button>
-    <hr>
-    <input id='number-input' type='number' value='0'>
-    <button id='add-button'>add number to list</button>
-    <br>
-    <button id='reset-button'>reset</button>
-    <br>
-    <br>
-    <div id='average'></div>
-    <hr>
-    <ul id='numbers-list'></ul>
-  </main>
+        const inputEl = document.getElementById('number-input');
+        const userInput = Number(inputEl.value);
+        // log user input
+        logEntry.input = userInput;
 
-  <script id='listeners'>
-    // the listeners are all correct
-    document.getElementById('add-button')
-      .addEventListener('click', addNumberHandler);
+        // update state
+        state.numbers.push(userInput);
+        state.average = average(state.numbers);
+        // log new state
+        logEntry.state = deepClone(state);
 
-    document.getElementById('reset-button')
-      .addEventListener('click', resetHandler);
-  </script>
+        // render and append new list
+        const listView = renderNumberLis(state.numbers);
+        document.getElementById('numbers-list').innerHTML = listView;
+        // log new list view
+        logEntry.listView = listView;
 
-</body>
+        // render and append new average
+        const averageView = renderAverage(state.average);
+        document.getElementById('average').innerHTML = averageView;
+        // log new average view
+        logEntry.averageView = averageView;
+      };
 
+      const resetHandler = () => {
+        debugger;
+        const logEntry = {
+          action: 'reset',
+        };
+        appLog.push(logEntry);
+
+        // reset state to it's initial values
+        state.numbers = [];
+        state.average = 0;
+        // log new state
+        logEntry.state = deepClone(state);
+
+        // reset Ui
+        document.getElementById('numbers-list').innerHTML = '';
+        document.getElementById('average').innerHTML = '';
+      };
+    </script>
+  </head>
+
+  <body>
+    <main id="user interface">
+      <button onclick="console.log(appLog)">appLog</button>
+      <hr />
+      <input id="number-input" type="number" value="0" />
+      <button id="add-button">add number to list</button>
+      <br />
+      <button id="reset-button">reset</button>
+      <br />
+      <br />
+      <div id="average"></div>
+      <hr />
+      <ul id="numbers-list"></ul>
+    </main>
+
+    <script id="listeners">
+      // the listeners are all correct
+      document.getElementById('add-button').addEventListener('click', addNumberHandler);
+
+      document.getElementById('reset-button').addEventListener('click', resetHandler);
+    </script>
+  </body>
 </html>
