@@ -4,55 +4,7 @@
     <meta charset="utf-8" />
     <title>the average</title>
 
-<<<<<<< HEAD
-<head>
-  <meta charset='utf-8'>
-  <title>the average</title>
-
-  <script src='../../../app/lib/deep-clone.js'></script>
-
-  <script id='data'>
-    'use strict';
-
-    const state = {
-      numbers: [],
-      average: 0
-    };
-    const appLog = [
-      { state: deepClone(state) }
-    ];
-  </script>
-
-  <script id='logic'>
-    'use strict';
-
-    // this functions works
-    /**
-     * computes the average of all numbers in an array
-     * if the array has no entries, it returns 0
-     * @param {number[]} arrOfNumbers - an array of numbers to average
-     * @returns {number} the average of all numbers in the array
-     */
-    const average = (arrOfNumbers) => {
-      if (arrOfNumbers.length === 0) {
-        return 0;
-      }
-      const numberOfNumbers = arrOfNumbers.length;
-      const sum = arrOfNumbers.reduce((sum, next) => sum + next);
-      const average = sum / numberOfNumbers;
-      return average;
-    };
-  </script>
-
-  <script id='views'>
-    // the views all work
-    'use strict';
-
-    const renderNumberLis = (arrOfNumbers) => {
-      const addListEntry = (list, next) => {
-        return `${list}\n<li>${next}</li>`;
-=======
-    <script src="../../../lib/deep-clone.js"></script>
+    <script src="../../../app/lib/deep-clone.js"></script>
 
     <script id="data">
       'use strict';
@@ -65,6 +17,8 @@
     </script>
 
     <script id="logic">
+      'use strict';
+
       // this functions works
       /**
        * computes the average of all numbers in an array
@@ -80,7 +34,6 @@
         const sum = arrOfNumbers.reduce((sum, next) => sum + next);
         const average = sum / numberOfNumbers;
         return average;
->>>>>>> 790a44e... Finish isolete and integrate week-1
       };
     </script>
 
