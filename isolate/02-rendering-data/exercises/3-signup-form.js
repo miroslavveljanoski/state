@@ -14,6 +14,9 @@ const signupForm = (appName, greeting = '') => {
 
   if (greeting) {
     // render a 'P' element and append it to the form
+    const pEl = document.createElement('p');
+    pEl.innerHTML = greeting;
+    formEl.appendChild(pEl);
   }
 
   // this is the first input element, it's correct
@@ -25,16 +28,33 @@ const signupForm = (appName, greeting = '') => {
   formEl.appendChild(document.createElement('br'));
 
   // render the second input
+  const input2 = document.createElement('input');
+  input2.type = 'email';
+  input2.name = 'email';
+  input2.placeholder = 'email';
+  formEl.appendChild(input2);
+  formEl.appendChild(document.createElement('br'));
 
   // render the third input
+  const input3 = document.createElement('input');
+  input3.type = 'password';
+  input3.name = 'password';
+  input3.placeholder = 'password';
+  formEl.appendChild(input3);
+  formEl.appendChild(document.createElement('br'));
 
   // render the fourth input
+  const input4 = document.createElement('input');
+  input4.type = 'button';
+  input4.value = appName;
+  // this can be also done in this way
+  // input4.innerHTML = `sign up for ${appName}`;
+  formEl.appendChild(input4);
 
-  return formEl
+  return formEl;
 };
 
 describe('signupForm: renders a signup form for your app', () => {
-
   describe('signup form for WerWatWy, with no greeting', () => {
     const actual = signupForm('WerWatWy');
 
@@ -46,91 +66,119 @@ describe('signupForm: renders a signup form for your app', () => {
     });
     console.dir(actual);
 
-    describe(`.children[0]`, () => {
-      const actualChild = actual.children[0];
-      it('has tagName: "INPUT"', () => {
-        expect(actualChild).to.have.property('tagName', 'INPUT');
-      });
-      it('has type: "text"', () => {
-        expect(actualChild).to.have.property('type', 'text');
-      });
-      it('has name: "userName"', () => {
-        expect(actualChild).to.have.property('name', 'userName');
-      });
-      it('has placeholder: "user name"', () => {
-        expect(actualChild).to.have.property('placeholder', 'user name');
-      });
-      console.dir(actualChild);
-    }, true);
-    describe(`.children[1]`, () => {
-      const actualChild = actual.children[1];
-      it('has tagName: "BR"', () => {
-        expect(actualChild).to.have.property('tagName', 'BR');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[0]`,
+      () => {
+        const actualChild = actual.children[0];
+        it('has tagName: "INPUT"', () => {
+          expect(actualChild).to.have.property('tagName', 'INPUT');
+        });
+        it('has type: "text"', () => {
+          expect(actualChild).to.have.property('type', 'text');
+        });
+        it('has name: "userName"', () => {
+          expect(actualChild).to.have.property('name', 'userName');
+        });
+        it('has placeholder: "user name"', () => {
+          expect(actualChild).to.have.property('placeholder', 'user name');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
+    describe(
+      `.children[1]`,
+      () => {
+        const actualChild = actual.children[1];
+        it('has tagName: "BR"', () => {
+          expect(actualChild).to.have.property('tagName', 'BR');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
 
-    describe(`.children[2]`, () => {
-      const actualChild = actual.children[2];
-      it('has tagName: "INPUT"', () => {
-        expect(actualChild).to.have.property('tagName', 'INPUT');
-      });
-      it('has type: "email"', () => {
-        expect(actualChild).to.have.property('type', 'email');
-      });
-      it('has name: "email"', () => {
-        expect(actualChild).to.have.property('name', 'email');
-      });
-      it('has placeholder: "email"', () => {
-        expect(actualChild).to.have.property('placeholder', 'email');
-      });
-      console.dir(actualChild);
-    }, true);
-    describe(`.children[3]`, () => {
-      const actualChild = actual.children[3];
-      it('has tagName: "BR"', () => {
-        expect(actualChild).to.have.property('tagName', 'BR');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[2]`,
+      () => {
+        const actualChild = actual.children[2];
+        it('has tagName: "INPUT"', () => {
+          expect(actualChild).to.have.property('tagName', 'INPUT');
+        });
+        it('has type: "email"', () => {
+          expect(actualChild).to.have.property('type', 'email');
+        });
+        it('has name: "email"', () => {
+          expect(actualChild).to.have.property('name', 'email');
+        });
+        it('has placeholder: "email"', () => {
+          expect(actualChild).to.have.property('placeholder', 'email');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
+    describe(
+      `.children[3]`,
+      () => {
+        const actualChild = actual.children[3];
+        it('has tagName: "BR"', () => {
+          expect(actualChild).to.have.property('tagName', 'BR');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
 
-    describe(`.children[4]`, () => {
-      const actualChild = actual.children[4];
-      it('has tagName: "INPUT"', () => {
-        expect(actualChild).to.have.property('tagName', 'INPUT');
-      });
-      it('has type: "password"', () => {
-        expect(actualChild).to.have.property('type', 'password');
-      });
-      it('has name: "password"', () => {
-        expect(actualChild).to.have.property('name', 'password');
-      });
-      it('has placeholder: "password"', () => {
-        expect(actualChild).to.have.property('placeholder', 'password');
-      });
-      console.dir(actualChild);
-    }, true);
-    describe(`.children[5]`, () => {
-      const actualChild = actual.children[5];
-      it('has tagName: "BR"', () => {
-        expect(actualChild).to.have.property('tagName', 'BR');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[4]`,
+      () => {
+        const actualChild = actual.children[4];
+        it('has tagName: "INPUT"', () => {
+          expect(actualChild).to.have.property('tagName', 'INPUT');
+        });
+        it('has type: "password"', () => {
+          expect(actualChild).to.have.property('type', 'password');
+        });
+        it('has name: "password"', () => {
+          expect(actualChild).to.have.property('name', 'password');
+        });
+        it('has placeholder: "password"', () => {
+          expect(actualChild).to.have.property('placeholder', 'password');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
+    describe(
+      `.children[5]`,
+      () => {
+        const actualChild = actual.children[5];
+        it('has tagName: "BR"', () => {
+          expect(actualChild).to.have.property('tagName', 'BR');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
 
-    describe(`.children[6]`, () => {
-      const actualChild = actual.children[6];
-      it('has tagName: "INPUT"', () => {
-        expect(actualChild).to.have.property('tagName', 'INPUT');
-      });
-      it('has type: "button"', () => {
-        expect(actualChild).to.have.property('type', 'button');
-      });
-      it('has value: "sign up for WerWatWy"', () => {
-        expect(actualChild).to.have.property('value', 'sign up for WerWatWy');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[6]`,
+      () => {
+        const actualChild = actual.children[6];
+        it('has tagName: "INPUT"', () => {
+          expect(actualChild).to.have.property('tagName', 'INPUT');
+        });
+        it('has type: "button"', () => {
+          expect(actualChild).to.have.property('type', 'button');
+        });
+        it('has value: "sign up for WerWatWy"', () => {
+          expect(actualChild).to.have.property('value', 'sign up for WerWatWy');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
   });
 
   describe('signup form for Extarnir, with a friendly greeting', () => {
@@ -144,101 +192,133 @@ describe('signupForm: renders a signup form for your app', () => {
     });
     console.dir(actual);
 
-    describe(`.children[0]`, () => {
-      const actualChild = actual.children[0];
-      it('has tagName: "P"', () => {
-        expect(actualChild).to.have.property('tagName', 'P');
-      });
-      it('has text: "Extrarnir welcomes you!"', () => {
-        expect(actualChild).to.have.text('Extrarnir welcomes you!');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[0]`,
+      () => {
+        const actualChild = actual.children[0];
+        it('has tagName: "P"', () => {
+          expect(actualChild).to.have.property('tagName', 'P');
+        });
+        it('has text: "Extrarnir welcomes you!"', () => {
+          expect(actualChild).to.have.text('Extrarnir welcomes you!');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
 
-    describe(`.children[1]`, () => {
-      const actualChild = actual.children[1];
-      it('has tagName: "INPUT"', () => {
-        expect(actualChild).to.have.property('tagName', 'INPUT');
-      });
-      it('has type: "text"', () => {
-        expect(actualChild).to.have.property('type', 'text');
-      });
-      it('has name: "userName"', () => {
-        expect(actualChild).to.have.property('name', 'userName');
-      });
-      it('has placeholder: "user name"', () => {
-        expect(actualChild).to.have.property('placeholder', 'user name');
-      });
-      console.dir(actualChild);
-    }, true);
-    describe(`.children[1]`, () => {
-      const actualChild = actual.children[2];
-      it('has tagName: "BR"', () => {
-        expect(actualChild).to.have.property('tagName', 'BR');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[1]`,
+      () => {
+        const actualChild = actual.children[1];
+        it('has tagName: "INPUT"', () => {
+          expect(actualChild).to.have.property('tagName', 'INPUT');
+        });
+        it('has type: "text"', () => {
+          expect(actualChild).to.have.property('type', 'text');
+        });
+        it('has name: "userName"', () => {
+          expect(actualChild).to.have.property('name', 'userName');
+        });
+        it('has placeholder: "user name"', () => {
+          expect(actualChild).to.have.property('placeholder', 'user name');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
+    describe(
+      `.children[1]`,
+      () => {
+        const actualChild = actual.children[2];
+        it('has tagName: "BR"', () => {
+          expect(actualChild).to.have.property('tagName', 'BR');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
 
-    describe(`.children[2]`, () => {
-      const actualChild = actual.children[3];
-      it('has tagName: "INPUT"', () => {
-        expect(actualChild).to.have.property('tagName', 'INPUT');
-      });
-      it('has type: "email"', () => {
-        expect(actualChild).to.have.property('type', 'email');
-      });
-      it('has name: "email"', () => {
-        expect(actualChild).to.have.property('name', 'email');
-      });
-      it('has placeholder: "email"', () => {
-        expect(actualChild).to.have.property('placeholder', 'email');
-      });
-      console.dir(actualChild);
-    }, true);
-    describe(`.children[4]`, () => {
-      const actualChild = actual.children[4];
-      it('has tagName: "BR"', () => {
-        expect(actualChild).to.have.property('tagName', 'BR');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[2]`,
+      () => {
+        const actualChild = actual.children[3];
+        it('has tagName: "INPUT"', () => {
+          expect(actualChild).to.have.property('tagName', 'INPUT');
+        });
+        it('has type: "email"', () => {
+          expect(actualChild).to.have.property('type', 'email');
+        });
+        it('has name: "email"', () => {
+          expect(actualChild).to.have.property('name', 'email');
+        });
+        it('has placeholder: "email"', () => {
+          expect(actualChild).to.have.property('placeholder', 'email');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
+    describe(
+      `.children[4]`,
+      () => {
+        const actualChild = actual.children[4];
+        it('has tagName: "BR"', () => {
+          expect(actualChild).to.have.property('tagName', 'BR');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
 
-    describe(`.children[5]`, () => {
-      const actualChild = actual.children[5];
-      it('has tagName: "INPUT"', () => {
-        expect(actualChild).to.have.property('tagName', 'INPUT');
-      });
-      it('has type: "password"', () => {
-        expect(actualChild).to.have.property('type', 'password');
-      });
-      it('has name: "password"', () => {
-        expect(actualChild).to.have.property('name', 'password');
-      });
-      it('has placeholder: "password"', () => {
-        expect(actualChild).to.have.property('placeholder', 'password');
-      });
-      console.dir(actualChild);
-    }, true);
-    describe(`.children[6]`, () => {
-      const actualChild = actual.children[6];
-      it('has tagName: "BR"', () => {
-        expect(actualChild).to.have.property('tagName', 'BR');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[5]`,
+      () => {
+        const actualChild = actual.children[5];
+        it('has tagName: "INPUT"', () => {
+          expect(actualChild).to.have.property('tagName', 'INPUT');
+        });
+        it('has type: "password"', () => {
+          expect(actualChild).to.have.property('type', 'password');
+        });
+        it('has name: "password"', () => {
+          expect(actualChild).to.have.property('name', 'password');
+        });
+        it('has placeholder: "password"', () => {
+          expect(actualChild).to.have.property('placeholder', 'password');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
+    describe(
+      `.children[6]`,
+      () => {
+        const actualChild = actual.children[6];
+        it('has tagName: "BR"', () => {
+          expect(actualChild).to.have.property('tagName', 'BR');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
 
-    describe(`.children[7]`, () => {
-      const actualChild = actual.children[7];
-      it('has tagName: "INPUT"', () => {
-        expect(actualChild).to.have.property('tagName', 'INPUT');
-      });
-      it('has type: "button"', () => {
-        expect(actualChild).to.have.property('type', 'button');
-      });
-      it('has value: "sign up for Extrarnir"', () => {
-        expect(actualChild).to.have.property('value', 'sign up for Extrarnir');
-      });
-      console.dir(actualChild);
-    }, true);
+    describe(
+      `.children[7]`,
+      () => {
+        const actualChild = actual.children[7];
+        it('has tagName: "INPUT"', () => {
+          expect(actualChild).to.have.property('tagName', 'INPUT');
+        });
+        it('has type: "button"', () => {
+          expect(actualChild).to.have.property('type', 'button');
+        });
+        it('has value: "sign up for Extrarnir"', () => {
+          expect(actualChild).to.have.property('value', 'sign up for Extrarnir');
+        });
+        console.dir(actualChild);
+      },
+      true
+    );
   });
 });

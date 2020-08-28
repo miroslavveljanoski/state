@@ -9,7 +9,12 @@ const expect = chai.expect;
  * @returns {HTMLParagraphElement} a rendered paragraph element
  */
 const renderParagraph = (text, classList = []) => {
-
+  const pEl = document.createElement('p');
+  pEl.innerHTML = text;
+  for (const className of classList) {
+    pEl.classList.add(className);
+  }
+  return pEl;
 };
 
 describe('renderParagraph: renders a paragraph with optional styling', () => {
@@ -99,5 +104,4 @@ describe('renderParagraph: renders a paragraph with optional styling', () => {
     });
     console.dir(actual);
   });
-
 });

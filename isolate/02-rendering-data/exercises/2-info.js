@@ -10,22 +10,22 @@ const expect = chai.expect;
  * @returns {HTMLDetailsElement}
  */
 const renderInfo = (caption, mainText, id = '') => {
-  const detailsEl = document.createElement('_');
-  _;
+  const detailsEl = document.createElement('details');
+  detailsEl.innerHTML = mainText;
+  detailsEl.id = id;
 
-  const summaryEl = document.createElement('_');
-  _;
-  _;
+  const summaryEl = document.createElement('summary');
+  summaryEl.innerHTML = caption;
+  detailsEl.appendChild(summaryEl);
 
-  const pEl = document.createElement('_');
-  _;
-  _;
+  const pEl = document.createElement('p');
+  pEl.innerHTML = mainText;
+  detailsEl.appendChild(pEl);
 
   return detailsEl;
 };
 
 describe('renderInfo: renders some info under a caption', () => {
-
   describe('several colors, no id', () => {
     const actual = renderInfo('several colors', 'red, orange, green, blue.');
 
@@ -154,5 +154,4 @@ describe('renderInfo: renders some info under a caption', () => {
       console.dir(actualChild);
     });
   });
-
 });
